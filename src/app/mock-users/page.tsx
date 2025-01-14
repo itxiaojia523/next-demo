@@ -1,3 +1,5 @@
+import { revalidatePath } from "next/cache";
+
 type MockUser = {
   id: number;
   name: string;
@@ -12,9 +14,27 @@ export default async function MockUsers() {
   );
   const users = await response.json();
 
+  async function addUser(formData: FormData) {
+    "use server";
+    const name = formData.get("name");
+    const res = await fetch(
+      "https://67863c67f80b78923aa5ffe0.mockapi.io/users",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name }),
+      }
+    );
+    const newUser = await res.json();
+    revalidatePath("/mock-users"); //不需要手动刷新页面也能显示新user
+    console.log(newUser);
+  }
+
   return (
     <div className="py-10">
-      <form className="mb-4">
+      <form action={addUser} className="mb-4">
         <input type="text" name="name" required className="border p-2 mr-2" />
         <button
           type="submit"
