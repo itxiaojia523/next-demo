@@ -5,6 +5,14 @@
  */
 "use client";
 import { useRouter } from "next/navigation";
+
+// 注意不能再client component用 metadata
+// export const metadata = {
+//   title: "dcos",
+//   description: "dcos",
+// };
+// 解决方案，page里移除use client
+// 这边代码全部移动到about.tsx 再引入
 const About = () => {
   const router = useRouter();
   return (
