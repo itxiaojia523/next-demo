@@ -36,6 +36,26 @@ export const Navigation = () => {
       <UserButton>
         <SignIn></SignIn>
       </UserButton>
+      <Link
+        href="/articles/breaking-news?lang=en"
+        className={
+          pathName.startsWith("/articles/breaking-news?lang=en")
+            ? "font-bold mr-4"
+            : "mr-4 text-blue-500"
+        }
+      >
+        Read in English
+      </Link>
+      <Link
+        href="/articles/breaking-news?lang=fr"
+        className={
+          pathName.startsWith("/articles/breaking-news?lang=fr")
+            ? "font-bold mr-4"
+            : "mr-4 text-blue-500"
+        }
+      >
+        Read in French
+      </Link>
     </nav>
   );
 };
