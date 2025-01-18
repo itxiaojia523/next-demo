@@ -30,6 +30,8 @@ const Product = async ({ params }: { params: { id: string } }) => {
     // notFound();
     //重定向
     redirect("/products");
+  } else if (parseInt(id) === 1000) {
+    throw new Error("Error in productId");
   }
   return <div>Product: {id}</div>;
 };
