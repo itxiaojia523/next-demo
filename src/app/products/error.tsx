@@ -1,3 +1,4 @@
+// Handling Errors in Layouts , error boundry cannot catch errors in the layout.tsx file from the same segment
 "use client";
 
 import { useRouter } from "next/navigation";
