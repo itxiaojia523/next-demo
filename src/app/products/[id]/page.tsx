@@ -25,14 +25,21 @@ export const generateMetadata = async ({
 
 const Product = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
+
+  const getRandomInt = (count: number) => {
+    return Math.floor(Math.random() * count);
+  };
+  const random = getRandomInt(2);
+  if (random === 1) {
+    throw new Error("Error loading products");
+  }
   //通过notFound函数，转向404页面
   if (parseInt(id) > 1000) {
     // notFound();
     //重定向
     redirect("/products");
-  } else if (parseInt(id) === 1000) {
-    throw new Error("Error in productId");
   }
+
   return <div>Product: {id}</div>;
 };
 
