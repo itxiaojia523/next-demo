@@ -5,13 +5,16 @@ export default function ComplexDashboardLayout({
   users,
   revenue,
   notifications,
+  login,
 }: {
   children: React.ReactNode;
   users: React.ReactNode;
   revenue: React.ReactNode;
   notifications: React.ReactNode;
+  login: React.ReactNode;
 }) {
-  return (
+  const isLoggedIn = false;
+  return isLoggedIn ? (
     <div>
       <div>{children}</div>
       {/* 传统情况下，在dashboard里我们分三个区域，放三个component
@@ -26,5 +29,7 @@ export default function ComplexDashboardLayout({
         <div style={{ display: "flex", flex: 1 }}>{notifications}</div>
       </div>
     </div>
+  ) : (
+    login
   );
 }
