@@ -1,4 +1,5 @@
 // only work in product env
+"use client";
 export default function ErrorBoundary({
   error,
 }: {
