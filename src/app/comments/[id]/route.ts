@@ -27,3 +27,18 @@ export async function PATCH(
 
   return Response.json(comments[index]);
 }
+
+export async function DELETE(
+  //不用的话，加一个_
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+  const index = comments.findIndex((coment) => {
+    return coment.id === parseInt(id);
+  });
+  const deletedComment = comments[index];
+  comments.splice(index, 1);
+
+  return Response.json(deletedComment);
+}
