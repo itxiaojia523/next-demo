@@ -3,11 +3,14 @@
 import { notFound, redirect } from "next/navigation";
 import { Metadata } from "next";
 
+// dynamic params 争对预渲染以外的情况，true的时候，就是正常的按需生成；false的话404
+// 如果是电商选true 如果是blog可能就false
+export const dynamicParams = false;
 // prerender 
 export async function generateStaticParams(){
  return [{id:"1"},{id:"2"},{id:"3"}]
 }
-
+// 如果访问4，他会在runtime时生成文件，还是static render
 type Props = {
   params: { id: string };
 };
