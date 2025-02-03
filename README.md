@@ -19,3 +19,7 @@ best:在一个树结构中，只有叶子是 CC
 
 所以不能将 CC 中引入 SC
 但是 SC 可以作为 children prop 给到 CC
+
+## fetching data
+
+优先通过 SC
