@@ -1,43 +1,65 @@
-import { addProduct } from "@/prisma-db";
-import { redirect } from "next/navigation";
-import { Submit } from "../components/submit";
+"use client";
+import { useActionState } from "react";
+import { createProduct, FormState } from "@/actions/products";
 
 export default function AddProductPage() {
-  async function createProduct(formData: FormData) {
-    "use server";
-    const title = formData.get("title") as string;
-    const price = formData.get("price") as string;
-    const description = formData.get("description") as string;
-    await addProduct(title, parseInt(price), description);
-    redirect("/products");
-  }
+  const initialState: FormState = {
+    errors: {},
+  };
+  const [state, formAction, isPending] = useActionState(
+    createProduct,
+    initialState
+  );
+
   return (
-    <form className="p-4 space-y-4 max-w-96" action={createProduct}>
-      <label className="text-black">
-        Title
-        <input
-          type="text"
-          className="block w-full p-2 text-black border rounded"
-          name="title"
-        ></input>
-      </label>
-      <label className="text-black">
-        Price
-        <input
-          type="number"
-          className="block w-full p-2 text-black border rounded"
-          name="price"
-        ></input>
-      </label>
-      <label className="text-black">
-        Description
-        <input
-          type="text"
-          className="block w-full p-2 text-black border rounded"
-          name="description"
-        ></input>
-      </label>
-      <Submit></Submit>
+    <form className="p-4 space-y-4 max-w-96" action={formAction}>
+      <div>
+        <label className="text-black">
+          Title
+          <input
+            type="text"
+            className="block w-full p-2 text-black border rounded"
+            name="title"
+          ></input>
+        </label>
+        {state.errors.title && (
+          <p className="text-red-500">{state.errors.title}</p>
+        )}
+      </div>
+      <div>
+        <label className="text-black">
+          Price
+          <input
+            type="number"
+            className="block w-full p-2 text-black border rounded"
+            name="price"
+          ></input>
+        </label>
+        {state.errors.price && (
+          <p className="text-red-500">{state.errors.price}</p>
+        )}
+      </div>
+      <div>
+        <label className="text-black">
+          Description
+          <input
+            type="text"
+            className="block w-full p-2 text-black border rounded"
+            name="description"
+          ></input>
+        </label>
+        {state.errors.description && (
+          <p className="text-red-500">{state.errors.description}</p>
+        )}
+      </div>
+      {/* <Submit></Submit> option */}
+      <button
+        type="submit"
+        className="block w-full p-2 text-white  rounded bg-blue-500 disabled:bg-gray-500"
+        disabled={isPending}
+      >
+        Submit
+      </button>
     </form>
   );
 }
