@@ -1,14 +1,15 @@
 "use client";
 import { useActionState } from "react";
-import { createProduct, FormState } from "@/actions/products";
+import { editProduct, FormState } from "@/actions/products";
 import { Product } from "../page";
 
 export default function EditProductForm({ product }: { product: Product }) {
   const initialState: FormState = {
     errors: {},
   };
+  const editProductWithId = editProduct.bind(null, product.id);
   const [state, formAction, isPending] = useActionState(
-    createProduct,
+    editProductWithId,
     initialState
   );
 
