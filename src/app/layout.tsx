@@ -39,7 +39,7 @@ export default function RootLayout({
           </header>
           {children}
           <footer className="bg-slate-900 text-white p-4 text-center">
-            Codevolution
+            Xiaojia523
           </footer>
         </body>
       </html>
