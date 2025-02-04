@@ -1,12 +1,22 @@
-import Link from "next/link";
+import { getProducts } from "@/prisma-db";
+import ProductDetail from "./product-detail";
 
-export default function Products() {
+export type Product = {
+  id: number;
+  title: string;
+  price: number;
+  description: string | null;
+};
+export default async function Products({
+  searchParams,
+}: {
+  searchParams: Promise<{ query?: string }>;
+}) {
+  const { query } = await searchParams;
+  const products: Product[] = await getProducts(query);
   return (
     <>
-    <h1>Products</h1>
-    <Link href="/products/1">p1</Link>
-    <Link href="/products/2">p2</Link>
-    <Link href="/products/3">p3</Link>
+      <ProductDetail products={products}></ProductDetail>
     </>
-  )
+  );
 }

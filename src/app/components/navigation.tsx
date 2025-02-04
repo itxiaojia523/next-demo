@@ -36,6 +36,11 @@ export const Navigation = () => {
       <UserButton>
         <SignIn></SignIn>
       </UserButton>
+      {/* <SignedIn>
+        <Link href="/user-profile">Profile</Link>
+        <SignOutButton></SignOutButton>
+      </SignedIn> */}
+
       <Link
         href="/articles/breaking-news?lang=en"
         className={
