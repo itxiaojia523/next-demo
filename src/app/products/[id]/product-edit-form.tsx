@@ -2,6 +2,7 @@
 import { useActionState } from "react";
 import { editProduct, FormState } from "@/actions/products";
 import { Product } from "../page";
+import Form from "next/form";
 
 export default function EditProductForm({ product }: { product: Product }) {
   const initialState: FormState = {
@@ -14,7 +15,7 @@ export default function EditProductForm({ product }: { product: Product }) {
   );
 
   return (
-    <form className="p-4 space-y-4 max-w-96" action={formAction}>
+    <Form className="p-4 space-y-4 max-w-96" action={formAction}>
       <div>
         <label className="text-black">
           Title
@@ -65,6 +66,6 @@ export default function EditProductForm({ product }: { product: Product }) {
       >
         Submit
       </button>
-    </form>
+    </Form>
   );
 }
